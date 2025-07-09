@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokoBagus - Toko Online Terlengkap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            padding: 0.75rem 1.5rem;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #ff5252;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        /* Product Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #ccc;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .discount {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            flex: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            margin: 50px auto;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+        }
+
+        /* Cart */
+        .cart-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ccc;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0.25rem;
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-total {
+            border-top: 2px solid #ddd;
+            padding-top: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 5px;
+            z-index: 3000;
+            transform: translateX(120%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+
+        /* User Profile */
+        .user-profile {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .profile-info h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #666;
+        }
+
+        /* Order History */
+        .order-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-id {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            background: #4caf50;
+            color: white;
+        }
+        .order-status.processing { background: #ffc107; }
+        .order-status.shipped { background: #2196f3; }
+        .order-status.delivered { background: #4caf50; }
+        .order-status.cancelled { background: #f44336; }
+
+
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .order-item-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                order: 3;
+                width: 100%;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .filters {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+                width: 95%;
+            }
+        }
+
+        /* Hidden by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Wishlist heart */
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #ccc;
+            transition: all 0.3s;
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.active {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .product-card {
+            position: relative;
+        }
+
+        /* Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Reviews */
+        .reviews {
+            margin-top: 2rem;
+        }
+
+        .review-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ffc107;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-user {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .rating-input .star {
+            cursor: pointer;
+            font-size: 2rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showPage('home')">TokoBagus</a>
+                
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Cari produk...">
+                    <button onclick="searchProducts()">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="header-btn" onclick="showPage('wishlist')">❤️ Wishlist</button>
+                    <button class="header-btn" onclick="showPage('cart')">
+                        🛒 Keranjang
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                    <button class="header-btn" id="userBtn" onclick="toggleUserMenu()">👤 Masuk</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home')">Beranda</a></li>
+                    <li><a href="#" onclick="showPage('products')">Produk</a></li>
+                    <li><a href="#" onclick="showPage('categories')">Kategori</a></li>
+                    <li><a href="#" onclick="showPage('about')">Tentang</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Kontak</a></li>
+                </ul>
+                
+                <div class="filters">
+                    <select id="categoryFilter" class="filter-select" onchange="filterProducts()">
+                        <option value="">Semua Kategori</option>
+                        <option value="elektronik">Elektronik</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="rumah-tangga">Rumah Tangga</option>
+                        <option value="kecantikan">Kecantikan</option>
+                        <option value="buku">Buku</option>
+                    </select>
+                    
+                    <select id="sortFilter" class="filter-select" onchange="sortProducts()">
+                        <option value="">Urutkan</option>
+                        <option value="name">Nama A-Z</option>
+                        <option value="price-low">Harga Terendah</option>
+                        <option value="price-high">Harga Tertinggi</option>
+                        <option value="rating">Rating Tertinggi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div id="home" class="page active">
+            <div class="container">
+                <div class="hero">
+                    <h1>Selamat Datang di TokoBagus</h1>
+                    <p>Temukan produk terbaik dengan harga terjangkau</p>
+                    <button class="btn" onclick="showPage('products')">Mulai Belanja</button>
+                </div>
+
+                <h2 class="section-title">Kategori Populer</h2>
+                <div class="categories" id="homeCategories">
+                    </div>
+
+                <h2 class="section-title">Produk Terbaru</h2>
+                <div class="products-grid" id="featuredProducts"></div>
+            </div>
+        </div>
+
+        <div id="products" class="page">
+            <div class="container">
+                <h2 class="section-title">Semua Produk</h2>
+                <div class="products-grid" id="allProducts"></div>
+            </div>
+        </div>
+
+        <div id="categories" class="page">
+            <div class="container">
+                <h2 class="section-title">Kategori Produk</h2>
+                <div class="categories" id="allCategories">
+                    </div>
+            </div>
+        </div>
+
+        <div id="cart" class="page">
+            <div class="container">
+                <h2 class="section-title">Keranjang Belanja</h2>
+                <div id="cartItems"></div>
+                <div class="cart-summary" id="cartSummary" style="display: none;">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">Rp 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Pajak (11%):</span>
+                        <span id="tax">Rp 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Ongkir:</span>
+                        <span id="shipping">Rp 15.000</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span id="total">Rp 0</span>
+                    </div>
+                    <button class="btn" onclick="showCheckout()" style="width: 100%; margin-top: 1rem;">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishlist" class="page">
+            <div class="container">
+                <h2 class="section-title">Wishlist Saya</h2>
+                <div class="products-grid" id="wishlistProducts"></div>
+            </div>
+        </div>
+
+        <div id="profile" class="page">
+            <div class="container">
+                <div class="user-profile">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profileAvatar">👤</div>
+                        <div class="profile-info">
+                            <h2 id="profileName">Nama Pengguna</h2>
+                            <p id="profileEmail">email@example.com</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="showEditProfile()">Edit Profile</button>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+
+                <h3>Riwayat Pembelian</h3>
+                <div id="orderHistory"></div>
+            </div>
+        </div>
+
+        <div id="about" class="page">
+            <div class="container">
+                <h2 class="section-title">Tentang TokoBagus</h2>
+                <div style="background: white; padding: 2rem; border-radius: 10px; line-height: 1.8;">
+                    <p>TokoBagus adalah platform e-commerce terpercaya yang menyediakan berbagai produk berkualitas dengan harga terjangkau. Kami berkomitmen memberikan pengalaman belanja online yang mudah, aman, dan menyenangkan.</p>
+                    <br>
+                    <p>Dengan koleksi produk yang beragam mulai dari elektronik, fashion, rumah tangga, kecantikan, hingga buku, TokoBagus hadir untuk memenuhi kebutuhan sehari-hari Anda.</p>
+                    <br>
+                    <p>Visi kami adalah menjadi toko online pilihan utama masyarakat Indonesia dengan memberikan pelayanan terbaik dan produk berkualitas tinggi.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="page">
+            <div class="container">
+                <h2 class="section-title">Hubungi Kami</h2>
+                <div style="background: white; padding: 2rem; border-radius: 10px;">
+                    <p style="margin-bottom: 1.5rem; text-align: center;">Punya pertanyaan atau masukan? Silakan isi form di bawah ini.</p>
+                    <div class="form-group">
+                        <label for="contactName">Nama:</label>
+                        <input type="text" id="contactName" placeholder="Masukkan nama Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email:</label>
+                        <input type="email" id="contactEmail" placeholder="Masukkan email Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Pesan:</label>
+                        <textarea id="contactMessage" rows="5" placeholder="Tulis pesan Anda"></textarea>
+                    </div>
+                    <button class="btn" onclick="sendMessage()">Kirim Pesan</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Masuk ke Akun</h2>
+            <div class="form-group">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" placeholder="Masukkan email Anda">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" placeholder="Masukkan password Anda">
+            </div>
+            <button class="btn" onclick="login()">Masuk</button>
+            <p style="text-align: center; margin-top: 1rem;">
+                Belum punya akun? <a href="#" onclick="closeModal('loginModal'); showModal('registerModal')">Daftar di sini</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Daftar Akun Baru</h2>
+            <div class="form-group">
+                <label for="registerName">Nama Lengkap:</label>
+                <input type="text" id="registerName" placeholder="Masukkan nama lengkap">
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" placeholder="Masukkan email">
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" placeholder="Masukkan password (min. 6 karakter)">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password:</label>
+                <input type="password" id="confirmPassword" placeholder="Konfirmasi password">
+            </div>
+            <button class="btn" onclick="register()">Daftar</button>
+            <p style="text-align: center; margin-top: 1rem;">
+                Sudah punya akun? <a href="#" onclick="closeModal('registerModal'); showModal('loginModal')">Masuk di sini</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+            <h2>Edit Profile</h2>
+            <div class="form-group">
+                <label for="editName">Nama Lengkap:</label>
+                <input type="text" id="editName" placeholder="Masukkan nama lengkap">
+            </div>
+            <div class="form-group">
+                <label for="editEmail">Email:</label>
+                <input type="email" id="editEmail" placeholder="Masukkan email" disabled>
+            </div>
+            <div class="form-group">
+                <label for="editPhone">Nomor Telepon:</label>
+                <input type="tel" id="editPhone" placeholder="Masukkan nomor telepon">
+            </div>
+            <div class="form-group">
+                <label for="editAddress">Alamat:</label>
+                <textarea id="editAddress" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+            </div>
+            <button class="btn" onclick="saveProfile()">Simpan Perubahan</button>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close" onclick="closeModal('productModal')">&times;</span>
+            <div id="productDetail"></div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('checkoutModal')">&times;</span>
+            <h2>Checkout</h2>
+            <div class="form-group">
+                <label for="checkoutName">Nama Lengkap:</label>
+                <input type="text" id="checkoutName" placeholder="Masukkan nama lengkap">
+            </div>
+            <div class="form-group">
+                <label for="checkoutEmail">Email:</label>
+                <input type="email" id="checkoutEmail" placeholder="Masukkan email">
+            </div>
+            <div class="form-group">
+                <label for="checkoutPhone">Nomor Telepon:</label>
+                <input type="tel" id="checkoutPhone" placeholder="Masukkan nomor telepon">
+            </div>
+            <div class="form-group">
+                <label for="checkoutAddress">Alamat Pengiriman:</label>
+                <textarea id="checkoutAddress" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Metode Pembayaran:</label>
+                <select id="paymentMethod">
+                    <option value="bank">Transfer Bank</option>
+                    <option value="credit">Kartu Kredit</option>
+                    <option value="ewallet">E-Wallet</option>
+                    <option value="cod">Bayar di Tempat (COD)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="orderNotes">Catatan (Opsional):</label>
+                <textarea id="orderNotes" rows="2" placeholder="Catatan untuk pesanan"></textarea>
+            </div>
+            <button class="btn" onclick="processOrder()">Proses Pesanan</button>
+        </div>
+    </div>
+
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('reviewModal')">&times;</span>
+            <h2>Tulis Review</h2>
+            <div class="form-group">
+                <label>Rating:</label>
+                <div class="rating-input" id="reviewRatingInput">
+                    <span class="star" data-rating="1">⭐</span>
+                    <span class="star" data-rating="2">⭐</span>
+                    <span class="star" data-rating="3">⭐</span>
+                    <span class="star" data-rating="4">⭐</span>
+                    <span class="star" data-rating="5">⭐</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="reviewText">Review:</label>
+                <textarea id="reviewText" rows="4" placeholder="Tulis review Anda"></textarea>
+            </div>
+            <button class="btn" onclick="submitReview()">Kirim Review</button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script>
+        // Initialize data
+        let products = [];
+        let cart = [];
+        let wishlist = [];
+        let currentUser = null;
+        let users = [];
+        let orders = [];
+        let currentPage = 'home';
+        let selectedRating = 0;
+        let reviewingProductId = null;
+
+        const categoriesData = {
+            'elektronik': { name: 'Elektronik', icon: '📱' },
+            'fashion': { name: 'Fashion', icon: '👔' },
+            'rumah-tangga': { name: 'Rumah Tangga', icon: '🏠' },
+            'kecantikan': { name: 'Kecantikan', icon: '💄' },
+            'buku': { name: 'Buku', icon: '📚' }
+        };
+
+        // Sample products data
+        function initializeProducts() {
+            products = [
+                { id: 1, name: 'iPhone 14 Pro', price: 15000000, originalPrice: 16000000, category: 'elektronik', image: '📱', rating: 4.8, reviews: [{ user: 'John Doe', rating: 5, text: 'Produk sangat bagus, kualitas premium!', date: '2024-01-15' }, { user: 'Jane Smith', rating: 4, text: 'Sesuai dengan ekspektasi, pengiriman cepat.', date: '2024-01-10' }], description: 'iPhone 14 Pro dengan teknologi terdepan dan kamera yang luar biasa.', stock: 50 },
+                { id: 2, name: 'Samsung Galaxy S23', price: 12000000, originalPrice: 13000000, category: 'elektronik', image: '📱', rating: 4.7, reviews: [{ user: 'Mike Johnson', rating: 5, text: 'Performa sangat baik, baterai tahan lama.', date: '2024-01-20' }], description: 'Samsung Galaxy S23 dengan layar Dynamic AMOLED 2X yang memukau.', stock: 30 },
+                { id: 3, name: 'MacBook Pro 14 inch', price: 28000000, originalPrice: 30000000, category: 'elektronik', image: '💻', rating: 4.9, reviews: [], description: 'MacBook Pro dengan chip M2 Pro untuk performa maksimal.', stock: 15 },
+                { id: 4, name: 'Sony WH-1000XM4', price: 4500000, originalPrice: 5000000, category: 'elektronik', image: '🎧', rating: 4.6, reviews: [], description: 'Headphone wireless dengan noise cancelling terbaik di kelasnya.', stock: 25 },
+                { id: 5, name: 'Kemeja Formal Pria', price: 250000, originalPrice: 300000, category: 'fashion', image: '👔', rating: 4.3, reviews: [], description: 'Kemeja formal pria dengan bahan berkualitas dan desain elegan.', stock: 100 },
+                { id: 6, name: 'Sepatu Sneakers', price: 800000, originalPrice: 1000000, category: 'fashion', image: '👟', rating: 4.4, reviews: [], description: 'Sneakers trendy dengan kenyamanan maksimal untuk aktivitas sehari-hari.', stock: 75 },
+                { id: 7, name: 'Tas Kulit Wanita', price: 1200000, originalPrice: 1500000, category: 'fashion', image: '👜', rating: 4.5, reviews: [], description: 'Tas kulit asli dengan desain elegan dan ruang penyimpanan yang luas.', stock: 40 },
+                { id: 8, name: 'Jam Tangan Pria', price: 2500000, originalPrice: 3000000, category: 'fashion', image: '⌚', rating: 4.7, reviews: [], description: 'Jam tangan klasik dengan mekanisme Swiss dan desain yang timeless.', stock: 20 },
+                { id: 9, name: 'Blender Philips', price: 750000, originalPrice: 900000, category: 'rumah-tangga', image: '🍹', rating: 4.2, reviews: [], description: 'Blender dengan daya tinggi untuk membuat smoothie dan jus segar.', stock: 60 },
+                { id: 10, name: 'Rice Cooker 1.8L', price: 450000, originalPrice: 500000, category: 'rumah-tangga', image: '🍚', rating: 4.1, reviews: [], description: 'Rice cooker dengan teknologi fuzzy logic untuk nasi yang sempurna.', stock: 80 },
+                { id: 11, name: 'Vacuum Cleaner', price: 1800000, originalPrice: 2000000, category: 'rumah-tangga', image: '🧹', rating: 4.3, reviews: [], description: 'Vacuum cleaner dengan daya hisap kuat untuk membersihkan rumah.', stock: 30 },
+                { id: 12, name: 'Kursi Kantor', price: 2000000, originalPrice: 2500000, category: 'rumah-tangga', image: '🪑', rating: 4.4, reviews: [], description: 'Kursi kantor ergonomis dengan penyangga punggung yang nyaman.', stock: 25 },
+                { id: 13, name: 'Skincare Set', price: 350000, originalPrice: 400000, category: 'kecantikan', image: '🧴', rating: 4.5, reviews: [], description: 'Paket skincare lengkap untuk perawatan wajah sehari-hari.', stock: 100 },
+                { id: 14, name: 'Lipstik Matte', price: 150000, originalPrice: 200000, category: 'kecantikan', image: '💄', rating: 4.3, reviews: [], description: 'Lipstik dengan formula matte yang tahan lama dan warna vibrant.', stock: 150 },
+                { id: 15, name: 'Foundation Liquid', price: 280000, originalPrice: 320000, category: 'kecantikan', image: '🤍', rating: 4.2, reviews: [], description: 'Foundation dengan coverage sempurna dan tahan sepanjang hari.', stock: 80 },
+                { id: 16, name: 'Parfum Unisex', price: 500000, originalPrice: 600000, category: 'kecantikan', image: '🧴', rating: 4.6, reviews: [], description: 'Parfum dengan aroma fresh dan tahan lama, cocok untuk pria dan wanita.', stock: 50 },
+                { id: 17, name: 'Novel Bestseller', price: 85000, originalPrice: 100000, category: 'buku', image: '📚', rating: 4.8, reviews: [], description: 'Novel bestseller dengan cerita yang menarik dan menginspirasi.', stock: 200 },
+                { id: 18, name: 'Buku Motivasi', price: 120000, originalPrice: 150000, category: 'buku', image: '📖', rating: 4.7, reviews: [], description: 'Buku motivasi yang akan mengubah mindset dan meningkatkan produktivitas.', stock: 150 },
+                { id: 19, name: 'Cookbook', price: 200000, originalPrice: 250000, category: 'buku', image: '👨‍🍳', rating: 4.4, reviews: [], description: 'Kumpulan resep masakan nusantara yang mudah dipraktikkan.', stock: 80 },
+                { id: 20, name: 'Majalah Teknologi', price: 35000, originalPrice: 40000, category: 'buku', image: '📰', rating: 4.1, reviews: [], description: 'Majalah bulanan yang membahas perkembangan teknologi terkini.', stock: 500 }
+            ];
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedCart = localStorage.getItem('tokobagus_cart');
+            const savedWishlist = localStorage.getItem('tokobagus_wishlist');
+            const savedUser = localStorage.getItem('tokobagus_currentUser');
+            const savedUsers = localStorage.getItem('tokobagus_users');
+            const savedOrders = localStorage.getItem('tokobagus_orders');
+            
+            if (savedCart) cart = JSON.parse(savedCart);
+            if (savedWishlist) wishlist = JSON.parse(savedWishlist);
+            if (savedUser) currentUser = JSON.parse(savedUser);
+            if (savedUsers) users = JSON.parse(savedUsers);
+            if (savedOrders) orders = JSON.parse(savedOrders);
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('tokobagus_cart', JSON.stringify(cart));
+            localStorage.setItem('tokobagus_wishlist', JSON.stringify(wishlist));
+            localStorage.setItem('tokobagus_currentUser', JSON.stringify(currentUser));
+            localStorage.setItem('tokobagus_users', JSON.stringify(users));
+            localStorage.setItem('tokobagus_orders', JSON.stringify(orders));
+        }
+
+        // Initialize the application
+        function init() {
+            initializeProducts();
+            loadData();
+            updateUI();
+            showPage('home');
+        }
+
+        // Update UI based on current state
+        function updateUI() {
+            updateCartBadge();
+            updateUserButton();
+            if (currentUser) {
+                updateUserProfile();
+            }
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            badge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Update user button
+        function updateUserButton() {
+            const userBtn = document.getElementById('userBtn');
+            if (currentUser) {
+                userBtn.textContent = `👤 ${currentUser.name.split(' ')[0]}`;
+                userBtn.onclick = () => showPage('profile');
+            } else {
+                userBtn.textContent = '👤 Masuk';
+                userBtn.onclick = () => showModal('loginModal');
+            }
+        }
+
+        // Show page
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const activePage = document.getElementById(page);
+            if(activePage) {
+                activePage.classList.add('active');
+            }
+            currentPage = page;
+            window.scrollTo(0, 0);
+            
+            if (page === 'home') {
+                renderCategories('homeCategories');
+                renderFeaturedProducts();
+            } else if (page === 'products') {
+                renderProducts();
+            } else if (page === 'categories') {
+                renderCategories('allCategories');
+            } else if (page === 'cart') {
+                renderCart();
+            } else if (page === 'wishlist') {
+                renderWishlist();
+            } else if (page === 'profile') {
+                if (!currentUser) {
+                    showPage('home');
+                    showModal('loginModal');
+                    return;
+                }
+                renderProfile();
+            }
+        }
+
+        // Show modal
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle user menu (entry point for login/profile)
+        function toggleUserMenu() {
+            if (currentUser) {
+                showPage('profile');
+            } else {
+                showModal('loginModal');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Calculate discount percentage
+        function calculateDiscount(original, current) {
+            if (!original || original <= current) return 0;
+            return Math.round((1 - current / original) * 100);
+        }
+
+        // Render star rating
+        function renderStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+            for (let i = 0; i < fullStars; i++) stars += '⭐';
+            if (halfStar) stars += '🌟'; // A different star for half
+            for (let i = 0; i < emptyStars; i++) stars += '☆';
+            return stars;
+        }
+
+        // Render product card
+        function renderProductCard(product) {
+            const discount = calculateDiscount(product.originalPrice, product.price);
+            const isInWishlist = wishlist.some(item => item.id === product.id);
+            
+            return `
+                <div class="product-card">
+                     <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+                        ${isInWishlist ? '❤️' : '🤍'}
+                    </button>
+                    <div onclick="showProductDetail(${product.id})">
+                        <div class="product-image">${product.image}</div>
+                        <div class="product-info">
+                            <div class="product-category">${categoriesData[product.category].name}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-rating">
+                                <span class="stars">${renderStars(product.rating)}</span>
+                                <span>(${product.reviews.length})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">${formatCurrency(product.price)}</span>
+                                ${discount > 0 ? `<span class="original-price">${formatCurrency(product.originalPrice)}</span>` : ''}
+                                ${discount > 0 ? `<span class="discount">-${discount}%</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                     <div class="product-actions" style="padding: 0 1.5rem 1.5rem;">
+                        <button class="btn btn-small" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            🛒 Keranjang
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Render products
+        function renderProducts(filteredProducts) {
+            const container = document.getElementById('allProducts');
+            const productsToRender = filteredProducts || products;
+
+            if (productsToRender.length === 0) {
+                 container.innerHTML = '<p style="text-align: center; padding: 2rem; grid-column: 1 / -1;">Produk tidak ditemukan.</p>';
+                 return;
+            }
+            container.innerHTML = productsToRender.map(product => renderProductCard(product)).join('');
+        }
+
+        // Render featured products
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featuredProducts');
+            // Sort by rating to get "popular" products
+            const featured = [...products].sort((a,b) => b.rating - a.rating).slice(0, 4);
+            container.innerHTML = featured.map(product => renderProductCard(product)).join('');
+        }
+
+        // Render categories
+        function renderCategories(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = Object.entries(categoriesData).map(([key, value]) => `
+                 <div class="category-card" onclick="filterByCategory('${key}')">
+                    <div class="category-icon">${value.icon}</div>
+                    <div class="category-name">${value.name}</div>
+                </div>
+            `).join('');
+        }
+
+        // Filter products by category from category cards
+        function filterByCategory(category) {
+            document.getElementById('categoryFilter').value = category;
+            showPage('products');
+            filterProducts();
+        }
+
+        // Core filter function
+        function filterProducts() {
+            const category = document.getElementById('categoryFilter').value;
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            
+            let filtered = products.filter(product => {
+                const matchesCategory = !category || product.category === category;
+                const matchesSearch = !searchQuery || 
+                                      product.name.toLowerCase().includes(searchQuery) || 
+                                      product.description.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+            
+            renderProducts(filtered); // Pass filtered products to render function
+            sortProducts(filtered); // Also apply sorting
+        }
+
+        // Core sort function
+        function sortProducts(productArray) {
+            const sortBy = document.getElementById('sortFilter').value;
+            let productsToSort = productArray || [...products]; // Use provided array or all products
+
+            // Re-filter if not coming from filterProducts
+            if (!productArray) {
+                const category = document.getElementById('categoryFilter').value;
+                const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+                if (category || searchQuery) {
+                     productsToSort = products.filter(product => {
+                        const matchesCategory = !category || product.category === category;
+                        const matchesSearch = !searchQuery || product.name.toLowerCase().includes(searchQuery);
+                        return matchesCategory && matchesSearch;
+                    });
+                }
+            }
+            
+            let sorted = [...productsToSort];
+            
+            switch (sortBy) {
+                case 'name':
+                    sorted.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    sorted.sort((a, b) => b.rating - a.rating);
+                    break;
+            }
+            
+            renderProducts(sorted);
+        }
+
+        // Search products
+        function searchProducts() {
+            showPage('products');
+            filterProducts();
+        }
+        
+        // Add to cart
+        function addToCart(productId, quantity = 1) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            
+            saveData();
+            updateCartBadge();
+            showNotification('Produk ditambahkan ke keranjang!');
+            if (currentPage === 'cart') {
+                renderCart();
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveData();
+            updateCartBadge();
+            renderCart();
+            showNotification('Produk dihapus dari keranjang!', 'error');
+        }
+
+        // Update cart quantity
+        function updateCartQuantity(productId, quantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                quantity = parseInt(quantity, 10);
+                if (quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = quantity;
+                    saveData();
+                    updateCartBadge();
+                    renderCart();
+                }
+            }
+        }
+
+        // Render cart
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const summary = document.getElementById('cartSummary');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 2rem;">Keranjang Anda kosong</p>';
+                summary.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">${item.image}</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatCurrency(item.price)}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" onchange="updateCartQuantity(${item.id}, this.value)">
+                            <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" onclick="removeFromCart(${item.id})">Hapus</button>
+                </div>
+            `).join('');
+            
+            // Calculate totals
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.11; // 11% tax
+            const shipping = subtotal > 0 ? 15000 : 0;
+            const total = subtotal + tax + shipping;
+            
+            document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+            document.getElementById('tax').textContent = formatCurrency(tax);
+            document.getElementById('shipping').textContent = formatCurrency(shipping);
+            document.getElementById('total').textContent = formatCurrency(total);
+            
+            summary.style.display = 'block';
+        }
+
+        // Toggle wishlist
+        function toggleWishlist(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingIndex = wishlist.findIndex(item => item.id === productId);
+            
+            if (existingIndex > -1) {
+                wishlist.splice(existingIndex, 1);
+                showNotification('Produk dihapus dari wishlist!', 'error');
+            } else {
+                wishlist.push(product);
+                showNotification('Produk ditambahkan ke wishlist!');
+            }
+            
+            saveData();
+            
+            // Re-render the current view to update the wishlist icon
+            if (currentPage === 'wishlist') renderWishlist();
+            if (currentPage === 'products') filterProducts();
+            if (currentPage === 'home') renderFeaturedProducts();
+            if (document.getElementById('productModal').style.display === 'block') {
+                showProductDetail(productId);
+            }
+        }
+
+
+        // Render wishlist
+        function renderWishlist() {
+            const container = document.getElementById('wishlistProducts');
+            
+            if (wishlist.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 2rem;">Wishlist Anda kosong</p>';
+                return;
+            }
+            
+            container.innerHTML = wishlist.map(product => renderProductCard(product)).join('');
+        }
+
+        // Show product detail modal
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const discount = calculateDiscount(product.originalPrice, product.price);
+            const isInWishlist = wishlist.some(item => item.id === product.id);
+            
+            document.getElementById('productDetail').innerHTML = `
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <div style="font-size: 10rem; text-align: center; background: #f5f5f5; border-radius: 10px; padding: 2rem;">
+                            ${product.image}
+                        </div>
+                    </div>
+                    <div style="flex: 2; min-width: 300px;">
+                        <div style="color: #667eea; margin-bottom: 0.5rem; text-transform: capitalize;">${product.category}</div>
+                        <h2 style="margin-bottom: 1rem;">${product.name}</h2>
+                        <div class="product-rating" style="margin-bottom: 1rem;">
+                            <span class="stars">${renderStars(product.rating)}</span>
+                            <span>(${product.reviews.length} reviews)</span>
+                        </div>
+                        <div class="product-price" style="margin-bottom: 1rem;">
+                            <span class="current-price" style="font-size: 1.8rem;">${formatCurrency(product.price)}</span>
+                            ${discount > 0 ? `<span class="original-price" style="font-size: 1.2rem;">${formatCurrency(product.originalPrice)}</span>` : ''}
+                            ${discount > 0 ? `<span class="discount">-${discount}%</span>` : ''}
+                        </div>
+                        <p style="margin-bottom: 1.5rem;">${product.description}</p>
+                        <p style="margin-bottom: 1.5rem;">Stok: <strong>${product.stock}</strong></p>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn" onclick="addToCart(${product.id})">🛒 Tambah ke Keranjang</button>
+                             <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" style="position: static; font-size: 1.5rem; width: 50px; height: 50px;" onclick="toggleWishlist(${product.id})">
+                                ${isInWishlist ? '❤️' : '🤍'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <h3 style="margin-bottom: 1rem; border-top: 1px solid #eee; padding-top: 2rem;">Ulasan Produk</h3>
+                    <button class="btn btn-secondary" onclick="showReviewModal(${product.id})">Tulis Review</button>
+                    <div id="reviewList" style="margin-top: 1.5rem;">
+                        ${product.reviews.length > 0 ? product.reviews.map(review => `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="review-user">${review.user}</span>
+                                    <span class="review-date">${new Date(review.date).toLocaleDateString('id-ID')}</span>
+                                </div>
+                                <div class="review-rating">${renderStars(review.rating)}</div>
+                                <p class="review-text">${review.text}</p>
+                            </div>
+                        `).join('') : '<p>Belum ada ulasan untuk produk ini.</p>'}
+                    </div>
+                </div>
+            `;
+            showModal('productModal');
+        }
+
+        // User Authentication
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!name || !email || !password || !confirmPassword) {
+                showNotification('Semua field wajib diisi!', 'error');
+                return;
+            }
+            if (password !== confirmPassword) {
+                showNotification('Password tidak cocok!', 'error');
+                return;
+            }
+            if (password.length < 6) {
+                showNotification('Password minimal 6 karakter!', 'error');
+                return;
+            }
+            if (users.find(u => u.email === email)) {
+                showNotification('Email sudah terdaftar!', 'error');
+                return;
+            }
+
+            const newUser = { 
+                id: Date.now(), 
+                name, 
+                email, 
+                password, // In real app, hash password
+                phone: '',
+                address: ''
+            };
+            users.push(newUser);
+            currentUser = newUser;
+            saveData();
+            updateUI();
+            closeModal('registerModal');
+            showNotification('Registrasi berhasil! Selamat datang!', 'success');
+        }
+
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                currentUser = user;
+                saveData();
+                updateUI();
+                closeModal('loginModal');
+                showNotification(`Selamat datang kembali, ${user.name.split(' ')[0]}!`, 'success');
+            } else {
+                showNotification('Email atau password salah!', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            saveData();
+            updateUI();
+            showPage('home');
+            showNotification('Anda telah logout.', 'success');
+        }
+
+        // Profile Management
+        function updateUserProfile() {
+            if (!currentUser) return;
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+        }
+
+        function showEditProfile() {
+            if (!currentUser) return;
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editEmail').value = currentUser.email;
+            document.getElementById('editPhone').value = currentUser.phone || '';
+            document.getElementById('editAddress').value = currentUser.address || '';
+            showModal('editProfileModal');
+        }
+
+        function saveProfile() {
+            if (!currentUser) return;
+            const newName = document.getElementById('editName').value;
+            const newPhone = document.getElementById('editPhone').value;
+            const newAddress = document.getElementById('editAddress').value;
+
+            if (!newName) {
+                showNotification('Nama tidak boleh kosong!', 'error');
+                return;
+            }
+            
+            // Update current user object
+            currentUser.name = newName;
+            currentUser.phone = newPhone;
+            currentUser.address = newAddress;
+            
+            // Find user in global users array and update it
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex > -1) {
+                users[userIndex] = currentUser;
+            }
+
+            saveData();
+            updateUI();
+            renderProfile(); // re-render profile page info
+            closeModal('editProfileModal');
+            showNotification('Profil berhasil diperbarui!', 'success');
+        }
+        
+        function renderProfile() {
+            updateUserProfile();
+            renderOrderHistory();
+        }
+        
+        // Checkout
+        function showCheckout() {
+            if (!currentUser) {
+                showNotification('Silakan login untuk melanjutkan checkout.', 'error');
+                showModal('loginModal');
+                return;
+            }
+            if (cart.length === 0) {
+                showNotification('Keranjang Anda kosong.', 'error');
+                return;
+            }
+            
+            document.getElementById('checkoutName').value = currentUser.name;
+            document.getElementById('checkoutEmail').value = currentUser.email;
+            document.getElementById('checkoutPhone').value = currentUser.phone || '';
+            document.getElementById('checkoutAddress').value = currentUser.address || '';
+            showModal('checkoutModal');
+        }
+
+        function processOrder() {
+            const name = document.getElementById('checkoutName').value;
+            const email = document.getElementById('checkoutEmail').value;
+            const phone = document.getElementById('checkoutPhone').value;
+            const address = document.getElementById('checkoutAddress').value;
+            if (!name || !email || !phone || !address) {
+                showNotification('Harap lengkapi semua data pengiriman.', 'error');
+                return;
+            }
+
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.11;
+            const shipping = subtotal > 0 ? 15000 : 0;
+            const total = subtotal + tax + shipping;
+
+            const newOrder = {
+                id: `ORD-${Date.now()}`,
+                userId: currentUser.id,
+                items: [...cart],
+                total: total,
+                date: new Date().toISOString(),
+                status: 'processing', // statuses: processing, shipped, delivered, cancelled
+                shippingAddress: { name, email, phone, address },
+                paymentMethod: document.getElementById('paymentMethod').value,
+                notes: document.getElementById('orderNotes').value
+            };
+            
+            orders.unshift(newOrder); // Add to beginning of array
+            cart = []; // Clear cart
+            saveData();
+            updateUI();
+            closeModal('checkoutModal');
+            showPage('profile');
+            showNotification(`Pesanan ${newOrder.id} berhasil dibuat!`, 'success');
+        }
+
+        function renderOrderHistory() {
+            const container = document.getElementById('orderHistory');
+            const userOrders = orders.filter(o => o.userId === currentUser.id);
+
+            if (userOrders.length === 0) {
+                container.innerHTML = '<p>Anda belum memiliki riwayat pembelian.</p>';
+                return;
+            }
+
+            container.innerHTML = userOrders.map(order => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <div>
+                            <span class="order-id">Order ID: ${order.id}</span><br>
+                            <small>${new Date(order.date).toLocaleString('id-ID')}</small>
+                        </div>
+                        <span class="order-status ${order.status}">${order.status}</span>
+                    </div>
+                    <p>Total: <strong>${formatCurrency(order.total)}</strong></p>
+                    <div class="order-items">
+                         ${order.items.map(item => `
+                            <div class="order-item-detail">
+                                <span>${item.name} (x${item.quantity})</span>
+                                <span>${formatCurrency(item.price * item.quantity)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Review System
+        function showReviewModal(productId) {
+            if (!currentUser) {
+                showNotification('Silakan login untuk menulis review.', 'error');
+                showModal('loginModal');
+                return;
+            }
+            reviewingProductId = productId;
+            selectedRating = 0; // Reset rating
+            document.getElementById('reviewText').value = '';
+            updateStarInput(0);
+            showModal('reviewModal');
+        }
+
+        function updateStarInput(rating) {
+            const stars = document.querySelectorAll('#reviewRatingInput .star');
+            stars.forEach(star => {
+                if (parseInt(star.dataset.rating) <= rating) {
+                    star.style.color = '#ffc107';
+                } else {
+                    star.style.color = '#ddd';
+                }
+            });
+        }
+        
+        document.querySelectorAll('#reviewRatingInput .star').forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.dataset.rating);
+                updateStarInput(selectedRating);
+            });
+        });
+
+        function submitReview() {
+            const text = document.getElementById('reviewText').value;
+            if (selectedRating === 0 || !text) {
+                showNotification('Harap berikan rating dan isi review.', 'error');
+                return;
+            }
+
+            const product = products.find(p => p.id === reviewingProductId);
+            if (!product) return;
+
+            product.reviews.unshift({
+                user: currentUser.name,
+                rating: selectedRating,
+                text: text,
+                date: new Date().toISOString()
+            });
+
+            // Recalculate average rating
+            const totalRating = product.reviews.reduce((sum, r) => sum + r.rating, 0);
+            product.rating = totalRating / product.reviews.length;
+            
+            // Note: This change to `products` array is temporary and will be lost on page reload
+            // without a backend. For this project, it updates the live state.
+            
+            closeModal('reviewModal');
+            showNotification('Terima kasih atas review Anda!', 'success');
+            // Re-render the product detail modal to show the new review
+            showProductDetail(reviewingProductId);
+        }
+
+        // Contact Page
+        function sendMessage() {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+
+            if (!name || !email || !message) {
+                showNotification('Harap lengkapi semua field.', 'error');
+                return;
+            }
+
+            // Simulate sending message
+            console.log('Message Sent:', { name, email, message });
+            showNotification('Pesan Anda telah terkirim! Terima kasih.', 'success');
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactMessage').value = '';
+        }
+
+        // Run the app
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
